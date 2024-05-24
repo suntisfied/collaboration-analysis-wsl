@@ -1,0 +1,18 @@
+# Use the official NVIDIA CUDA development base image
+FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install PyTorch with CUDA support
+RUN pip3 install torch==2.1.0+cu121 torchvision==0.16.0+cu121 torchaudio==2.1.0+cu121 --index-url https://download.pytorch.org/whl/cu121
+
+# Add a test script
+RUN echo 'import torch; print(torch.cuda.is_available())' > /test_cuda.py
+
+# Set the entrypoint
+ENTRYPOINT ["/bin/bash"]

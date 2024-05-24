@@ -1,0 +1,7 @@
+torch
+torchvision
+torchaudio
+ffmpeg-python
+pyannote.audio==2.1.1
+speechbrain
+huggingface_hub

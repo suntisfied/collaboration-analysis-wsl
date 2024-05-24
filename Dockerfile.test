@@ -1,0 +1,29 @@
+FROM nvidia/cuda:12.4.1-devel-ubuntu22.04
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y python3 python3-pip build-essential
+
+# Install PyTorch with CUDA support and NumPy
+RUN pip3 install torch==2.1.0+cu121 numpy --index-url https://download.pytorch.org/whl/cu121
+
+# Copy CUDA and Python test files
+COPY minimal_cuda_test.cu /app/minimal_cuda_test.cu
+COPY minimal_cuda_test.py /app/minimal_cuda_test.py
+
+# Compile the CUDA test program
+RUN nvcc -o /app/minimal_cuda_test /app/minimal_cuda_test.cu
+
+# Ensure symbolic links are correctly created and set library paths
+RUN mkdir -p /usr/local/cuda-12.4/targets/x86_64-linux/lib/stubs \
+ && ln -sf /usr/local/cuda-12.4/targets/x86_64-linux/lib/libcudart.so.12 /usr/local/cuda/lib64/libcudart.so \
+ && ln -sf /usr/local/cuda-12.4/targets/x86_64-linux/lib/libcudart.so.12 /usr/local/cuda-12.4/targets/x86_64-linux/lib/stubs/libcudart.so \
+ && echo "/usr/local/cuda/lib64" > /etc/ld.so.conf.d/cuda.conf \
+ && echo "/usr/local/cuda-12.4/targets/x86_64-linux/lib" >> /etc/ld.so.conf.d/cuda.conf \
+ && ldconfig
+
+# List CUDA libraries to verify correct paths
+RUN ls -l /usr/local/cuda/lib64/ > /app/cuda_lib64.txt
+RUN ls -l /usr/local/cuda-12.4/targets/x86_64-linux/lib/ > /app/cuda_targets_lib.txt
+
+# Run the CUDA test program and the Python script
+CMD cat /app/cuda_lib64.txt && cat /app/cuda_targets_lib.txt && /app/minimal_cuda_test && python3 /app/minimal_cuda_test.py

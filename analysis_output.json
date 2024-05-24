@@ -1,0 +1,61 @@
+{
+    "interaction_matrix": {
+        "SPEAKER_01": {
+            "SPEAKER_00": 29,
+            "SPEAKER_01": 24,
+            "SPEAKER_02": 2,
+            "SPEAKER_04": 3,
+            "SPEAKER_03": 5
+        },
+        "SPEAKER_00": {
+            "SPEAKER_00": 824,
+            "SPEAKER_01": 28,
+            "SPEAKER_02": 33,
+            "SPEAKER_04": 34,
+            "SPEAKER_03": 42
+        },
+        "SPEAKER_02": {
+            "SPEAKER_00": 29,
+            "SPEAKER_01": 1,
+            "SPEAKER_02": 35,
+            "SPEAKER_04": 8,
+            "SPEAKER_03": 13
+        },
+        "SPEAKER_04": {
+            "SPEAKER_00": 38,
+            "SPEAKER_01": 5,
+            "SPEAKER_02": 7,
+            "SPEAKER_04": 7,
+            "SPEAKER_03": 3
+        },
+        "SPEAKER_03": {
+            "SPEAKER_00": 42,
+            "SPEAKER_01": 5,
+            "SPEAKER_02": 9,
+            "SPEAKER_04": 8,
+            "SPEAKER_03": 22
+        }
+    },
+    "frequency_analysis": [
+        {
+            "Speaker": "SPEAKER_00",
+            "Frequency": 962
+        },
+        {
+            "Speaker": "SPEAKER_02",
+            "Frequency": 86
+        },
+        {
+            "Speaker": "SPEAKER_03",
+            "Frequency": 86
+        },
+        {
+            "Speaker": "SPEAKER_01",
+            "Frequency": 63
+        },
+        {
+            "Speaker": "SPEAKER_04",
+            "Frequency": 60
+        }
+    ]
+}
